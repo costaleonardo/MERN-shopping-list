@@ -6,7 +6,7 @@
   "repository": "git@github.com:costaleonardo/mern-shopping-list.git",
   "scripts": {
     "start": "node server.js",
-    "server": "nodemon server.js"
+    "server:start": "nodemon server.js"
   },
   "author": "Brad Traversy",
   "license": "MIT",

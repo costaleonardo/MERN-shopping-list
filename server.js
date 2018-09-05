@@ -1,29 +1,29 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-
-const app = express();
-const port = process.env.PORT || 5000;
+const path = require('path');
 
 const items = require('./routes/api/itemsRoute');
 
-// MongoDB config
-const db = require('./config/keys').mongoURI;
+const app = express();
 
-// Connect to MongoDB
-mongoose
-  .connect(db, { useNewUrlParser: true })
-  .then(() => console.log('MongoDB connected...'))
-  .catch(err => console.log(err));
-
-// Body parser middleware
+// Bodyparser Middleware
 app.use(bodyParser.json());
 
-// Use routes
+// DB Config
+const db = require('./config/keys').mongoURI;
+
+// Connect to Mongo
+mongoose
+  .connect(db, {useNewUrlParser: true}) // Adding new mongo url parser
+  .then(() => console.log('MongoDB Connected...'))
+  .catch(err => console.log(err));
+
+// Use Routes
 app.use('/api/items', items);
 
 // Serve static assets if in production
-if (process.env.NODE_END === 'production') {
+if (process.env.NODE_ENV === 'production') {
   // Set static folder
   app.use(express.static('client/build'));
 
@@ -32,6 +32,6 @@ if (process.env.NODE_END === 'production') {
   });
 }
 
-app.listen(port, () => console.log(`Server started on port ${port}.`));
+const port = process.env.PORT || 5000;
 
-
+app.listen(port, () => console.log(`Server started on port ${port}`));

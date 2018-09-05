@@ -8,7 +8,6 @@ import {
   ListGroupItem,
   Button
  } from 'reactstrap';
- import uuid from 'uuid';
 
  import { getItems, deleteItem } from '../actions/itemActions';
 
